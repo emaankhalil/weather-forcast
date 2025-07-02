@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-container">
+        <div class="weather-icon-container">
+            <div class="large-sun-icon">
+                <div class="sun-center"></div>
+                <div class="sun-rays">
+                    <div class="ray ray-1"></div>
+                    <div class="ray ray-2"></div>
+                    <div class="ray ray-3"></div>
+                    <div class="ray ray-4"></div>
+                    <div class="ray ray-5"></div>
+                    <div class="ray ray-6"></div>
+                    <div class="ray ray-7"></div>
+                    <div class="ray ray-8"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="weather-title">
+            <h1>Weather</h1>
+        </div>
+
+        <div class="location-search">
+            <input 
+                id="locationInput" 
+                type="text" 
+                placeholder="Enter location..."
+                class="location-input"
+            >
+            <button id="useCurrentLocation" class="location-btn">
+                📍
+            </button>
+        </div>
+
+        <div class="loading-text">
+            <p>Loading weather data...</p>
+            <p>Please wait a moment</p>
+        </div>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="hidden error-container">
+        <div class="error-content">
+            <div class="error-icon">⚠️</div>
+            <p id="errorMessage" class="error-message"></p>
+            <button id="retryBtn" class="retry-btn">Try Again</button>
+        </div>
+    </div>
+
+    <!-- Weather Content -->
+    <div id="weatherContent" class="hidden weather-content">
+        <!-- Weather Display -->
+        <div class="weather-display">
+            <div class="current-temp">
+                <span id="currentTemp">20°C</span>
+                <button id="refreshBtn" class="refresh-btn">→</button>
+            </div>
+            
+            <div class="weather-condition">
+                <img id="currentWeatherIcon" src="" alt="" class="weather-icon">
+                <span id="weatherCondition">broken clouds</span>
+            </div>
+            
+            <div class="location-date">
+                <div class="location">
+                    <span>📍</span>
+                    <span id="currentLocation">Tagurothi, NP</span>
+                </div>
+                <div id="currentDate" class="date">Thu Jun 15 2023</div>
+            </div>
+        </div>
+
+        <!-- Weather Details -->
+        <div class="weather-details">
+            <div class="detail-item">
+                <span class="detail-icon">💧</span>
+                <span id="humidity" class="detail-value">42%</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">💨</span>
+                <span id="windSpeed" class="detail-value">5.66 km/h</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">🌅</span>
+                <span id="sunrise" class="detail-value">6:53 AM</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">🌇</span>
+                <span id="sunset" class="detail-value">5:38 PM</span>
+            </div>
+        </div>
+
+        <!-- Forecast -->
+        <div class="forecast-section">
+            <h3>Forecast</h3>
+            <div id="forecastContainer" class="forecast-list">
+                <!-- Forecast items will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="settings-section">
+            <div class="unit-toggle">
+                <button id="celsiusBtn" class="unit-btn active">°C</button>
+                <button id="fahrenheitBtn" class="unit-btn">°F</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

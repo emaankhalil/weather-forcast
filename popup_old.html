@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="weather-container">
+        <!-- Weather Icon (Large Sun) -->
+        <div class="weather-icon-container">
+            <div class="large-sun-icon">
+                <div class="sun-center"></div>
+                <div class="sun-rays">
+                    <div class="ray ray-1"></div>
+                    <div class="ray ray-2"></div>
+                    <div class="ray ray-3"></div>
+                    <div class="ray ray-4"></div>
+                    <div class="ray ray-5"></div>
+                    <div class="ray ray-6"></div>
+                    <div class="ray ray-7"></div>
+                    <div class="ray ray-8"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather Title -->
+        <div class="weather-title">
+            <h1>Weather</h1>
+        </div>
+
+        <!-- Location Search -->
+        <div class="location-search">
+            <input 
+                id="locationInput" 
+                type="text" 
+                placeholder="Search location..."
+                class="location-input"
+            >
+            <button id="useCurrentLocation" class="location-btn">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+            </button>
+        </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="hidden p-8 text-center">
+        <div class="bg-white bg-opacity-15 rounded-2xl p-8 backdrop-blur-sm">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-3 border-white mx-auto mb-4"></div>
+            <p class="text-lg font-medium">Loading weather data...</p>
+            <p class="text-sm opacity-80 mt-1">Please wait a moment</p>
+        </div>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="hidden p-8 text-center">
+        <div class="bg-red-500 bg-opacity-20 rounded-2xl p-6 backdrop-blur-sm border border-red-400 border-opacity-30">
+            <svg class="w-12 h-12 text-red-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+            </svg>
+            <p id="errorMessage" class="text-base font-medium mb-4"></p>
+            <button id="retryBtn" class="px-6 py-3 bg-white bg-opacity-25 rounded-xl font-medium hover:bg-opacity-35 transition-all duration-200 border border-white border-opacity-20">
+                Try Again
+            </button>
+        </div>
+    </div>
+
+    <!-- Weather Content -->
+    <div id="weatherContent" class="hidden">
+        <!-- Current Weather -->
+        <div class="p-5">
+            <div class="text-center mb-6">
+                <h2 id="currentLocation" class="text-xl font-bold mb-1 text-white"></h2>
+                <p id="currentDate" class="text-sm opacity-90 text-blue-100"></p>
+            </div>
+            
+            <!-- Main Weather Display -->
+            <div class="bg-white bg-opacity-15 rounded-2xl p-5 mb-5 backdrop-blur-sm">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="text-center">
+                        <img id="currentWeatherIcon" src="" alt="" class="w-20 h-20 mx-auto mb-2 drop-shadow-lg">
+                        <div class="text-4xl font-bold mb-1" id="currentTemp"></div>
+                        <div class="text-sm opacity-90 mb-1" id="feelsLike"></div>
+                        <div class="text-base font-medium capitalize" id="weatherCondition"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Details Grid -->
+            <div class="grid grid-cols-2 gap-3 text-sm">
+                <div class="bg-white bg-opacity-15 rounded-xl p-4 backdrop-blur-sm transition-all duration-200 hover:bg-opacity-25">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <svg class="w-4 h-4 text-blue-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.127 4.693A8.25 8.25 0 0116.25 12a8.25 8.25 0 01-8.25 8.25A8.25 8.25 0 017.127 4.693zM2.25 12a9.75 9.75 0 119.75 9.75A9.75 9.75 0 012.25 12z"/>
+                        </svg>
+                        <div class="opacity-90 text-xs font-medium">HUMIDITY</div>
+                    </div>
+                    <div class="font-bold text-lg" id="humidity"></div>
+                </div>
+                <div class="bg-white bg-opacity-15 rounded-xl p-4 backdrop-blur-sm transition-all duration-200 hover:bg-opacity-25">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+                        </svg>
+                        <div class="opacity-90 text-xs font-medium">WIND</div>
+                    </div>
+                    <div class="font-bold text-lg" id="windSpeed"></div>
+                </div>
+                <div class="bg-white bg-opacity-15 rounded-xl p-4 backdrop-blur-sm transition-all duration-200 hover:bg-opacity-25">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                        <div class="opacity-90 text-xs font-medium">PRESSURE</div>
+                    </div>
+                    <div class="font-bold text-lg" id="pressure"></div>
+                </div>
+                <div class="bg-white bg-opacity-15 rounded-xl p-4 backdrop-blur-sm transition-all duration-200 hover:bg-opacity-25">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                        <div class="opacity-90 text-xs font-medium">VISIBILITY</div>
+                    </div>
+                    <div class="font-bold text-lg" id="visibility"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5-Day Forecast -->
+        <div class="bg-gradient-to-r from-black from-black bg-opacity-25 backdrop-blur-sm p-5">
+            <div class="flex items-center space-x-2 mb-4">
+                <svg class="w-5 h-5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <h3 class="font-bold text-lg">4-Day Forecast</h3>
+            </div>
+            <div id="forecastContainer" class="space-y-3">
+                <!-- Forecast items will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="p-5 bg-gradient-to-r from-black from-black bg-opacity-30 backdrop-blur-sm border-t border-white border-opacity-10">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span class="text-sm font-medium">Temperature Unit</span>
+                </div>
+                <div class="flex bg-white bg-opacity-20 rounded-xl p-1 backdrop-blur-sm">
+                    <button id="celsiusBtn" class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200 hover:bg-white hover:bg-opacity-20">°C</button>
+                    <button id="fahrenheitBtn" class="px-4 py-2 rounded-lg text-sm font-bold transition-all duration-200 hover:bg-white hover:bg-opacity-20">°F</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

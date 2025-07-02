@@ -1,0 +1,376 @@
+/* Redesigned styles for Weather Extension - Dark Black Theme */
+
+body {
+    font-family: 'SF Pro Display', 'Segoe UI', Tahoma, Geneva, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    width: 350px;
+    height: 600px;
+    color: white;
+    overflow-x: hidden;
+}
+
+.weather-container {
+    background: #1e1e1e;
+    color: white;
+    width: 350px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.weather-icon-container {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.large-sun-icon {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.sun-center {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    top: 25px;
+    left: 25px;
+}
+
+.sun-rays {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+}
+
+.ray {
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    background: #fff;
+    top: 0;
+    left: 45px;
+    transform-origin: 5px 50px;
+}
+
+.ray-1 { transform: rotate(0deg); }
+.ray-2 { transform: rotate(45deg); }
+.ray-3 { transform: rotate(90deg); }
+.ray-4 { transform: rotate(135deg); }
+.ray-5 { transform: rotate(180deg); }
+.ray-6 { transform: rotate(225deg); }
+.ray-7 { transform: rotate(270deg); }
+.ray-8 { transform: rotate(315deg); }
+
+.weather-title {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
+.location-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.location-input {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #1a1a1a;
+    color: #fff;
+    margin-right: 10px;
+    border: 1px solid #333;
+}
+
+.location-btn {
+    padding: 10px;
+    background: #333;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.location-btn:hover {
+    background: #444;
+}
+
+.loading-text {
+    text-align: center;
+    color: #999;
+    font-size: 0.9em;
+    margin: 20px 0;
+}
+
+.error-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.error-content {
+    background: rgba(255,0,0,0.1);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.error-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.retry-btn {
+    background: #e74c3c;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.weather-content {
+    padding: 20px 15px;
+}
+
+.weather-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.current-temp {
+    font-size: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.refresh-btn {
+    font-size: 1.5em;
+    background: none;
+    border: none;
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.weather-condition {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.weather-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.location-date {
+    text-align: center;
+    color: #999;
+    margin-bottom: 20px;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.detail-item {
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #333;
+    transition: background 0.3s ease;
+}
+
+.detail-item:hover {
+    background: #222;
+}
+
+.detail-icon {
+    font-size: 1.5em;
+    margin-right: 5px;
+}
+
+.forecast-section {
+    margin: 20px 0;
+}
+
+.forecast-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.settings-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.unit-toggle {
+    display: inline-flex;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #1a1a1a;
+    border: 1px solid #333;
+}
+
+.unit-btn {
+    padding: 10px 15px;
+    color: #fff;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.active {
+    background: #333;
+    border: 1px solid #555;
+}
+
+/* Utility classes */
+.hidden {
+    display: none !important;
+}
+
+/* Loading container styles */
+.loading-container {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.loading-container .weather-icon-container {
+    padding: 40px 0;
+}
+
+.loading-container .weather-title {
+    font-size: 2.5em;
+    font-weight: 300;
+    margin: 30px 0;
+}
+
+.loading-container .location-search {
+    margin: 30px 0;
+}
+
+.loading-container .location-input {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 15px 20px;
+    color: white;
+    font-size: 16px;
+    width: 70%;
+    text-align: center;
+}
+
+.loading-container .location-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.loading-container .location-btn {
+    background: #333;
+    border: none;
+    border-radius: 20px;
+    padding: 15px;
+    margin-left: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.loading-container .location-btn:hover {
+    background: #444;
+}
+
+.loading-text {
+    margin-top: 40px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.loading-text p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.loading-text p:first-child {
+    font-weight: 500;
+}
+
+/* Error container styles */
+.error-container {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.error-content {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.error-icon {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 16px;
+    margin: 20px 0;
+    line-height: 1.5;
+}
+
+.retry-btn {
+    background: #ff6b6b;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 15px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.retry-btn:hover {
+    background: #ff5252;
+}
+
+/* Improve sun rays animation */
+.large-sun-icon {
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ray {
+    border-radius: 5px;
+}
+
+/* Make the sun rays more rounded */
+.ray-1, .ray-5 { height: 25px; }
+.ray-2, .ray-4, .ray-6, .ray-8 { height: 20px; }
+.ray-3, .ray-7 { height: 25px; }
